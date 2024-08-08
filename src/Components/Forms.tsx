@@ -1,7 +1,7 @@
 import PersonalInfo from "./PersonalInfo";
 import Plans from "./Plans";
 import AddOns from "./AddOns";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Finish from "./Finish";
 
 export type TAddOns = {
@@ -77,6 +77,41 @@ const Forms = ({
     },
   ]);
 
+  const plansArr = [
+    {
+      name: "Arcade",
+      price: 9,
+      image: "/images/icon-arcade.svg",
+    },
+    {
+      name: "Advanced",
+      price: 12,
+      image: "/images/icon-advanced.svg",
+    },
+    {
+      name: "Pro",
+      price: 15,
+      image: "/images/icon-pro.svg",
+    },
+  ];
+
+  useEffect(() => {
+    const selectedPlan = plansArr.find(plan => plan.name === currentPlan);
+    if (selectedPlan) {
+      const newPlanPrice = yearly ? selectedPlan.price * 10 : selectedPlan.price;
+      
+      const newAddOnPrice = addOnsArr.reduce((total, addOn) => {
+        return total + (addOn.checked ? (yearly ? addOn.priceYearly : addOn.priceMonthly) : 0);
+      }, 0);
+      
+      setSummary(prevSummary => ({
+        ...prevSummary,
+        planPrice: newPlanPrice,
+        addOnPrice: newAddOnPrice,
+      }));
+    }
+  }, [yearly, currentPlan, addOnsArr]);
+
   const handleToggle = () => {
     setYearly(!yearly);
   };
@@ -128,6 +163,7 @@ const Forms = ({
             setSummary={setSummary}
             currentPlan={currentPlan}
             setCurrentPlan={setCurrentPlan}
+            plansArr={plansArr}
           />
         )}
         {activeStep === 3 && (

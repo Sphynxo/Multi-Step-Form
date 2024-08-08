@@ -39,7 +39,7 @@ const Finish = ({
                     yearly ? "(Yearly)" : "(Monthly)"
                   }`}</p>
                   <p
-                    className="text-[1.4rem] text-grey underline"
+                    className="text-[1.4rem] text-grey underline cursor-pointer"
                     onClick={() => setActiveStep(2)}
                   >
                     Change
@@ -50,10 +50,10 @@ const Finish = ({
                 }/${yearly ? "yr" : "mo"}`}</p>
               </div>
               <div className="mt-[1.2rem]">
-                {checkedAddOns ? (
+                {checkedAddOns.length > 0 && (
                   <div className="flex flex-col gap-[1.2rem]">
                     {checkedAddOns.map((addOn) => (
-                      <div className="flex justify-between">
+                      <div key={addOn.name} className="flex justify-between">
                         <p className="text-[1.4rem] text-grey">
                           {addOn.name}
                         </p>
@@ -65,11 +65,11 @@ const Finish = ({
                       </div>
                     ))}
                   </div>
-                ) : null}
+                )}
               </div>
             </div>
             <div className="flex justify-between px-[1.6rem] mt-[2.4rem]">
-              <p className="text-[1.4rem] text-grey">{`Total(${
+              <p className="text-[1.4rem] text-grey">{`Total (${
                 yearly ? "per year" : "per month"
               })`}</p>
               <p className="text-[1.6rem] text-purple font-bold">{`+$${totalAmount}/${

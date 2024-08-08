@@ -44,7 +44,7 @@ const PersonalInfo = ({
             id="name"
             name="name"
             value={summary.name}
-            className={`w-full border-[1px] ] rounded-[4px] text-[1.5rem] py-[1.2rem] px-[1.6rem] mt-[0.4rem] outline-[#483EFF] ${
+            className={`w-full border-[1px] rounded-[4px] text-[1.5rem] py-[1.2rem] px-[1.6rem] mt-[0.4rem] outline-[#483EFF] ${
               errors.name ? "border-[#EE374A]" : "border-[#D6D9E6"
             }`}
             onChange={handleChange}

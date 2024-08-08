@@ -3,10 +3,10 @@ import { TSummaryProps } from "./Forms";
 const Plans = ({
   yearly,
   handleToggle,
-  summary,
   setSummary,
   currentPlan,
   setCurrentPlan,
+  plansArr
 }: {
   yearly: boolean;
   handleToggle: () => void;
@@ -14,29 +14,8 @@ const Plans = ({
   setSummary: React.Dispatch<React.SetStateAction<TSummaryProps>>;
   currentPlan: string;
   setCurrentPlan: React.Dispatch<React.SetStateAction<string>>;
+  plansArr: { name: string, price: number, image: string }[];
 }) => {
-  const plansArr = [
-    {
-      name: "Arcade",
-      priceMonth: 9,
-      priceYear: 90,
-      image: "/images/icon-arcade.svg",
-    },
-
-    {
-      name: "Advanced",
-      priceMonth: 12,
-      priceYear: 120,
-      image: "/images/icon-advanced.svg",
-    },
-
-    {
-      name: "Pro",
-      priceMonth: 15,
-      priceYear: 150,
-      image: "/images/icon-pro.svg",
-    },
-  ];
 
   const handlePlan = (planName: string) => {
     const selectedPlan = plansArr.find(
@@ -44,12 +23,12 @@ const Plans = ({
     );
     if (selectedPlan) {
       setCurrentPlan(planName);
-      setSummary({
-        ...summary,
+      setSummary(prevSummary => ({
+        ...prevSummary,
         planPrice: yearly
-          ? selectedPlan.priceYear
-          : selectedPlan.priceMonth,
-      });
+          ? selectedPlan.price * 10
+          : selectedPlan.price,
+      }));
     }
   };
 
@@ -81,9 +60,7 @@ const Plans = ({
                 {plan.name}
               </h2>
               <p className="text-[1.4rem] text-grey">{`$${
-                yearly
-                  ? `${plan.priceYear}/yr`
-                  : `${plan.priceMonth}/mo`
+                yearly ? `${plan.price * 10}/yr` : `${plan.price}/mo`
               }`}</p>
             </div>
           </div>
