@@ -7,13 +7,15 @@ function App() {
 
   return (
     <>
-      <main className="px-[1.6rem] xl:px-[25rem] xl:flex xl:items-center xl:justify-center xl:h-screen ">
+      <main className=" xl:px-[25rem] xl:flex xl:items-center xl:justify-center xl:h-screen ">
         <div className="xl:flex xl:w-full xl:h-[63rem] xl:bg-white xl:p-[1.6rem] xl:rounded-[1.5rem] xl:gap-[10rem] xl:pr-[10rem]">
           <Steps activeStep={activeStep} />
-          <Forms
-            activeStep={activeStep}
-            setActiveStep={setActiveStep}
-          />
+          <div className="px-[1.6rem] xl:p-0 xl:w-full">
+            <Forms
+              activeStep={activeStep}
+              setActiveStep={setActiveStep}
+            />
+          </div>
         </div>
       </main>
     </>
